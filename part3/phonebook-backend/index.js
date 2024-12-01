@@ -7,13 +7,15 @@ app.use(express.json());
 app.use(cors());
 app.use(express.static('build'));
 
-morgan.token('body', (req) =>{
-  if(req.body){
+morgan.token('body', req => {
+  if (req.body) {
     return JSON.stringify(req.body);
   }
 });
 
-app.use(morgan(':method :url :status :res[content-length] - :response-time ms :body'));
+app.use(
+  morgan(':method :url :status :res[content-length] - :response-time ms :body')
+);
 
 let persons = [
   {
@@ -47,14 +49,16 @@ app.get('/api/persons', (request, response) => {
 });
 
 app.get('/info', (request, response) => {
-  const info = `Phonebook has info for ${persons.length} people. </br></br> ${new Date()}`;
+  const info = `Phonebook has info for ${
+    persons.length
+  } people. </br></br> ${new Date()}`;
 
   response.send(info);
 });
 
 app.get('/api/persons/:id', (request, response) => {
   const id = Number(request.params.id);
-  const person = persons.find((p) => p.id === id);
+  const person = persons.find(p => p.id === id);
   if (person) {
     response.json(person);
   } else {
@@ -63,7 +67,6 @@ app.get('/api/persons/:id', (request, response) => {
 });
 
 app.post('/api/persons', (request, response) => {
-
   const body = request.body;
 
   if (!body.name || !body.number || body.name === '' || body.number === '') {
@@ -72,7 +75,7 @@ app.post('/api/persons', (request, response) => {
     });
   }
 
-  const names = persons.map((p) => p.name);
+  const names = persons.map(p => p.name);
   if (names.includes(body.name)) {
     response.status(400).json({
       error: 'name must be unique',
@@ -90,7 +93,6 @@ app.post('/api/persons', (request, response) => {
 });
 
 app.put('/api/persons/:id', (request, response) => {
-
   const id = Number(request.params.id);
   const idExist = persons.find(p => p.id === id);
 
@@ -110,30 +112,30 @@ app.put('/api/persons/:id', (request, response) => {
   const person = {
     id,
     name: body.name,
-    number: body.number
-  }
+    number: body.number,
+  };
   persons = persons.concat(person);
   response.json(person);
-})
+});
 
 const generateId = () => {
   let id = Math.floor(Math.random() * 1000000);
   const numbers = persons.map(p => p.id);
-  while (numbers.includes(id)){
-    id = Math.floor(Math.random() * 1000000)
+  while (numbers.includes(id)) {
+    id = Math.floor(Math.random() * 1000000);
   }
   return id;
 };
 
 app.delete('/api/persons/:id', (request, response) => {
   const id = Number(request.params.id);
-  persons = persons.filter((p) => p.id !== id);
+  persons = persons.filter(p => p.id !== id);
   response.status(204).end();
 });
 
 const unknownEndpoint = (request, response) => {
-  response.status(404).send({ error: 'unknown endpoint'});
-}
+  response.status(404).send({ error: 'unknown endpoint' });
+};
 
 app.use(unknownEndpoint);
 
@@ -142,4 +144,3 @@ const PORT = process.env.PORT || 3001;
 app.listen(PORT, () => {
   console.log(`Server running on ${PORT}`);
 });
-
