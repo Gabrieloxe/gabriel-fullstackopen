@@ -46,7 +46,7 @@ app.get('/', (request, response) => {
 
 app.get('/api/persons', (request, response) => {
   response.json(persons);
-});
+}); 
 
 app.get('/info', (request, response) => {
   const info = `Phonebook has info for ${
