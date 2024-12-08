@@ -1,29 +1,11 @@
-# Phonebook Part3
+# Phonebook App fullstack
 
-[Backend Link](https://safe-fjord-25185.herokuapp.com/api/persons)
+Part 3 of the fullstackopen course
 
-## To set up
+[Phonebook fullstack app](https://ex3-phonebook-backend.onrender.com/)
 
-- `npm install`
-- `npm install express`
-- `npm install --save-dev nodemon`
+## How to Develop
 
-## To run / Develop
-
-- `npm run dev`
-- Add the following scripts to your `package.json`
-
-```js
-"scripts": {
-    "start": "node index.js",
-    "dev": "nodemon index.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-```
-
-## Available commands
-
-- `npm run build:ui`
-- `npm run deploy`
-- `npm run deploy:full`
-- `npm run logs:prod`
+- The real development repos
+- [ex3-phonebook-backend](https://github.com/Gabrieloxe/ex3-phonebook-backend)
+- [ex3-phonebook-frontend](https://github.com/Gabrieloxe/ex3-phonebook-frontend)

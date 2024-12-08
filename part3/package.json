@@ -1,27 +1,24 @@
 {
-  "name": "phonebook-backend",
-  "version": "0.0.1",
-  "description": "",
+  "name": "ex3-phonebook-backend",
+  "version": "1.0.0",
+  "description": "exercise 3 backend",
   "main": "index.js",
+  "type": "module",
   "scripts": {
     "start": "node index.js",
     "dev": "nodemon index.js",
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "build:ui": "rm -rf build && cd ../../part2/phonebook && npm run build --prod && cp -r build ../../phonebook-backend",
-    "deploy": "git push heroku master",
-    "deploy:full": "npm run build:ui && git add . && git commit -m uibuild && git push && npm run deploy",
-    "logs:prod": "heroku logs --tail",
-    "server": "json-server -p3001 --watch db.json"
+    "build:ui": "rm -rf dist && cd ../ex3-phonebook-frontend && npm run build && cp -r dist ../ex3-phonebook-backend",
+    "deploy:full": "npm run build:ui && git add . && git commit -m uibuild && git push",
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "Gabriel Ong",
+  "author": "",
   "license": "ISC",
   "dependencies": {
     "cors": "^2.8.5",
-    "express": "^4.17.1",
-    "mongoose": "^5.13.1",
+    "express": "^4.21.2",
     "morgan": "^1.10.0"
   },
   "devDependencies": {
-    "nodemon": "^2.0.7"
+    "nodemon": "^3.1.7"
   }
 }
