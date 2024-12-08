@@ -7,6 +7,8 @@
   "scripts": {
     "start": "node index.js",
     "dev": "nodemon index.js",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
     "build:ui": "rm -rf dist && cd ../ex3-phonebook-frontend && npm run build && cp -r dist ../ex3-phonebook-backend",
     "deploy:full": "npm run build:ui && git add . && git commit -m uibuild && git push",
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -15,10 +17,16 @@
   "license": "ISC",
   "dependencies": {
     "cors": "^2.8.5",
+    "dotenv": "^16.4.7",
     "express": "^4.21.2",
+    "mongoose": "^8.8.4",
     "morgan": "^1.10.0"
   },
   "devDependencies": {
+    "@eslint/js": "^9.16.0",
+    "@stylistic/eslint-plugin-js": "^2.11.0",
+    "eslint": "^9.16.0",
+    "globals": "^15.13.0",
     "nodemon": "^3.1.7"
   }
 }
