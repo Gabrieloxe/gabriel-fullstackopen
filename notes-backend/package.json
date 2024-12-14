@@ -4,13 +4,13 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js",
-    "dev": "nodemon index.js",
+    "start": "NODE_ENV=production node index.js",
+    "dev": "NODE_ENV=development nodemon index.js",
+    "test": "NODE_ENV=test node --test",
     "build:ui": "rm -rf build && cd ../follow-along-app/ && npm run build --prod && cp -r build ../notes-backend",
     "deploy": "git push heroku master",
     "deploy:full": "npm run build:ui && git add . && git commit -m uibuild && git push master && npm run deploy",
-    "logs:prod": "heroku logs --tail",
-    "test": "node --test"
+    "logs:prod": "heroku logs --tail"
   },
   "author": "Gabriel Ong",
   "license": "ISC",
@@ -25,6 +25,7 @@
     "@eslint/js": "^9.16.0",
     "eslint": "^9.16.0",
     "globals": "^15.13.0",
-    "nodemon": "^2.0.7"
+    "nodemon": "^2.0.7",
+    "supertest": "^7.0.0"
   }
 }
