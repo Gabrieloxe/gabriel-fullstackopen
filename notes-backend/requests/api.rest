@@ -35,3 +35,34 @@ GET http://localhost:3001/api/notes/610677f334be9925bc049e90
 
 ### Delete a note
 DELETE http://localhost:3001/api/notes/60e065b35e6bc226ea7cbc36
+
+### try the login request
+POST http://localhost:3001/api/login
+Content-Type: application/json
+{
+    "username": "mluukkai",
+    "password": "salainen"
+}
+
+### try the login request with wrong password
+POST http://localhost:3001/api/login
+Content-Type: application/json
+
+{
+    "username": "mluukkai",
+    "password": "wrong password"
+}
+
+### new note with auth
+POST http://localhost:3001/api/notes
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Im1sdXVra2FpIiwiaWQiOiI2NzVlYzU3NjI2ZThmMjNmMWY5OWNiZTAiLCJpYXQiOjE3MzQzMTgzMDR9.KwD_rueeWKIUogCaZ-ZEPxg4yhX8mBebgadxDZOHukg
+
+{
+    "content": "single page apps use token based auth",
+    "important": false
+}
+
+### get all notes
+GET http://localhost:3001/api/notes
+Content-Type: application/json
