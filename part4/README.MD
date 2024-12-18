@@ -2,4 +2,6 @@
 
 ## We have learnt
 
-- basic auth for an app
+- basic user administration
+- basic auth for an app using bearer tokens
+- testing
