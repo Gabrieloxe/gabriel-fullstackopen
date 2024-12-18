@@ -4,8 +4,16 @@ require('express-async-errors');
 const app = express();
 const cors = require('cors');
 const mongoose = require('mongoose');
-const blogRouter = require('./controllers/blogController');
 const logger = require('./utils/logger');
+const {
+  errorHandler,
+  unknownEndpoint,
+  tokenExtractor,
+  userExtractor,
+} = require('./utils/middleware');
+const blogRouter = require('./controllers/blogRouter');
+const usersRouter = require('./controllers/userRouter');
+const loginRouter = require('./controllers/loginRouter');
 
 mongoose.set('strictQuery', false);
 mongoose
@@ -19,14 +27,12 @@ mongoose
 
 app.use(cors());
 app.use(express.json());
-app.use('/api/blogs', blogRouter);
+app.use(tokenExtractor);
+app.use('/api/blogs', userExtractor, blogRouter);
+app.use('/api/users', usersRouter);
+app.use('/api/login', loginRouter);
 
-app.use((err, req, res, next) => {
-  if (err.name === 'ValidationError') {
-    const messages = Object.values(err.errors).map(e => e.message);
-    res.status(400).json({ error: messages.join(', ') });
-  }
-  next(err);
-});
+app.use(errorHandler);
+app.use(unknownEndpoint);
 
 module.exports = app;

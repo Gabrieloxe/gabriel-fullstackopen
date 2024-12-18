@@ -7,10 +7,14 @@ const blogSchema = new mongoose.Schema({
   },
   title: {
     type: String,
-    required:  [true, 'title is required'],
+    required: [true, 'title is required'],
   },
   author: String,
   likes: Number,
+  user: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User',
+  },
 });
 
 blogSchema.set('toJSON', {

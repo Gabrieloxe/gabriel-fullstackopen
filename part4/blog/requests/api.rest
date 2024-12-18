@@ -1,0 +1,59 @@
+### should create a user
+POST http://localhost:3003/api/users
+Content-Type: application/json
+
+{
+    "username": "mluukkai",
+    "name": "Matti Lukkainen",
+    "password": "mluukkaipassword"
+}
+
+
+### get all users
+GET  http://localhost:3003/api/users
+Content-Type: application/json
+
+
+
+
+### lgoin as the user and get the bearer token
+POST http://localhost:3003/api/login
+Content-Type: application/json
+
+{
+    "username": "hellas",
+    "password": "hellaspassword"
+}
+
+
+
+### Create a new blog
+POST http://localhost:3003/api/blogs
+Content-Type: application/json
+Authorization: Bearer token
+
+
+{
+    "title": "blog to delete",
+    "author": "hellas",
+    "url": "https://deleteblog2.com",
+    "likes": 1,
+}
+
+### get all blogs
+GET http://localhost:3003/api/blogs
+Authorization: Bearer token
+
+
+
+### delete a blog
+DELETE http://localhost:3003/api/blogs/676262536de1dada7c36a289
+Content-Type: application/json
+Authorization: Bearer token
+
+
+
+
+
+
+

@@ -49,4 +49,22 @@ const mockBlogs = [
   },
 ];
 
-module.exports = mockBlogs;
+const mockUsers = [
+  {
+    username: 'robert',
+    name: 'Robert C. Martin',
+    password: 'robertpassword',
+  },
+  {
+    username: 'Edsger',
+    name: 'Edsger W. Dijkstra',
+    password: 'edsgerpassword',
+  },
+  {
+    username: 'michael',
+    name: 'Michael Chan',
+    password: 'michaelpassword',
+  },
+];
+
+module.exports = { mockBlogs, mockUsers };
