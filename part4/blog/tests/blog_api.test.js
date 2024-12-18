@@ -178,10 +178,8 @@ describe('blog API tests', () => {
   });
 
   test('should prevent deletion of blog if logged in as another user', async () => {
-    const blogsAtStart = await helper.blogsInDb();
-    const blogToDelete = blogsAtStart.find(
-      b => b.author === 'Robert C. Martin'
-    );
+    const blogs = await helper.blogsInDb();
+    const blogToDelete = blogs.find(b => b.author === 'Robert C. Martin');
 
     const loginResponse = await api
       .post('/api/login')
@@ -196,7 +194,12 @@ describe('blog API tests', () => {
       .expect(401);
   });
 
-  
+  test('should return unathorized if token is not provided', async () => {
+    const blogs = await helper.blogsInDb();
+    const blogToDelete = blogs[0];
+
+    await api.delete(`/api/blogs/${blogToDelete.id}`).expect(401);
+  });
 
   after(async () => {
     await mongoose.connection.close();
