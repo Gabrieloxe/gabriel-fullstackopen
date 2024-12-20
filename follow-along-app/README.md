@@ -3,7 +3,6 @@
 ## What is it
 
 A space for me to follow along the tutorials without having to touch the submission apps
-[APP](https://radiant-meadow-03252.herokuapp.com/)
 
 ## How to develop
 
