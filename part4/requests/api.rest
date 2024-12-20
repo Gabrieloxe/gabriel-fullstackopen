@@ -27,6 +27,7 @@ Content-Type: application/json
 
 
 
+
 ### Create a new blog
 POST http://localhost:3003/api/blogs
 Content-Type: application/json
@@ -40,10 +41,24 @@ Authorization: Bearer token
     "likes": 1,
 }
 
+
+### put request to update a blog
+PUT http://localhost:3003/api/blogs/67615a68c66f9214ae5489ce
+Content-Type: application/json
+Authorization : Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImhlbGxhcyIsImlkIjoiNjc2MTQzYzQwNmYyODFkNDI5Mjk4ZWJmIiwiaWF0IjoxNzM0NzA1NTUxLCJleHAiOjE3MzQ3MDkxNTF9.-Els2jyyLexPZaUR3-wDuyv324Cx7so_k9fmyvFZ5Ew
+
+{
+    "url": "https://hellas.com",
+    "title": "hellas blog",
+    "author": "hellas",
+    "likes": 4,
+    "user" : "676143c406f281d429298ebf"
+}
+
 ### get all blogs
 GET http://localhost:3003/api/blogs
-Authorization: Bearer token
-
+Authorization : Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImhlbGxhcyIsImlkIjoiNjc2MTQzYzQwNmYyODFkNDI5Mjk4ZWJmIiwiaWF0IjoxNzM0NzA1NTUxLCJleHAiOjE3MzQ3MDkxNTF9.-Els2jyyLexPZaUR3-wDuyv324Cx7so_k9fmyvFZ5Ew
+Content-Type: application/json
 
 
 ### delete a blog

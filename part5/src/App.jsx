@@ -5,13 +5,11 @@ import Notification from './components/Notification';
 import LoginForm from './components/LoginForm';
 import BlogForm from './components/BlogForm';
 import blogService from './services/blogs';
-import loginService from './services/login';
-import Toggable from './components/Toggable';
+import Togglable from './components/Togglable';
 
 const App = () => {
   const [blogs, setBlogs] = useState([]);
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
+
   const [user, setUser] = useState(null);
   const [notification, setNotification] = useState(null);
   const blogFormRef = useRef();
@@ -36,28 +34,7 @@ const App = () => {
     }
   }, []);
 
-  const handleLogin = async event => {
-    event.preventDefault();
-
-    try {
-      const user = await loginService.login({
-        username,
-        password,
-      });
-      window.localStorage.setItem('loggedBlogappUser', JSON.stringify(user));
-      blogService.setToken(user.token);
-      setUser(user);
-      setUsername('');
-      setPassword('');
-    } catch (exception) {
-      notify('Wrong username or password', 'error');
-      setTimeout(() => {
-        notify(null);
-      }, 5000);
-    }
-  };
-
-  const handleLogout = async event => {
+  const handleLogout = () => {
     window.localStorage.clear();
     setUser(null);
     blogService.setToken(null);
@@ -76,36 +53,32 @@ const App = () => {
     }, 5000);
   };
 
-  if (user === null) {
-    return (
-      <div>
-        <Notification notification={notification} />
-        <h2>Log in to application</h2>
-        <Toggable buttonLabel='login' ref={blogFormRef}>
-          <LoginForm
-            handlePasswordChange={setPassword}
-            handleUsernameChange={setUsername}
-            handleSubmit={handleLogin}
-            username={username}
-            password={password}
-          />
-        </Toggable>
-      </div>
-    );
-  }
+  const sortedBlogs = blogs.sort((a, b) => a.likes - b.likes);
 
   return (
     <div>
-      <h2>blogs</h2>
-      <Notification notification={notification} />
-      <div style={{ display: 'flex', alignItems: 'center' }}>
-        <p>{user.name} logged-in</p>
-        <button onClick={handleLogout}>logout</button>
-      </div>
-      <BlogForm addBlog={addBlog} />
-      {blogs.map(blog => (
-        <Blog key={blog.id} blog={blog} />
-      ))}
+      {user === null ? (
+        <div>
+          <Notification notification={notification} />
+          <h2>Log in to application</h2>
+          <LoginForm setUser={setUser} />
+        </div>
+      ) : (
+        <div>
+          <h2>blogs</h2>
+          <Notification notification={notification} />
+          <div style={{ display: 'flex', alignItems: 'center' }}>
+            <p>{user.name} logged-in</p>
+            <button onClick={handleLogout}>logout</button>
+          </div>
+          <Togglable buttonLabel='new blog' ref={blogFormRef}>
+            <BlogForm addBlog={addBlog} />
+          </Togglable>
+          {sortedBlogs.map(blog => (
+            <Blog key={blog.id} blog={blog} />
+          ))}
+        </div>
+      )}
     </div>
   );
 };
