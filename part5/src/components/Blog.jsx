@@ -9,7 +9,7 @@ const blogStyle = {
   marginBottom: 5,
 };
 
-const Blog = ({ blog, handleDelete }) => {
+const Blog = ({ blog, handleDelete, user }) => {
   const [expanded, setExpanded] = useState(false);
   const [likes, setLikes] = useState(blog.likes);
 
@@ -39,7 +39,11 @@ const Blog = ({ blog, handleDelete }) => {
             <button onClick={handleLike}>like</button>
           </div>
           <div>{blog.user.name}</div>
-          <button onClick={async () => await handleDelete(blog)}>remove</button>
+          {user.username === blog.user.username && (
+            <button onClick={async () => await handleDelete(blog)}>
+              remove
+            </button>
+          )}
         </div>
       )}
     </div>
