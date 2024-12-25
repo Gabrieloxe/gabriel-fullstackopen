@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
 import loginService from '../services/login';
 import blogService from '../services/blogs';
+import PropTypes from 'prop-types';
+import { notify } from '../../../part4/controllers/blogRouter';
 
-const LoginForm = ({ setUser }) => {
+const LoginForm = ({ setUser, notify }) => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
@@ -55,3 +57,8 @@ const LoginForm = ({ setUser }) => {
   );
 };
 export default LoginForm;
+
+LoginForm.propTypes = {
+  setUser: PropTypes.func.isRequired,
+  notify: PropTypes.func.isRequired,
+};

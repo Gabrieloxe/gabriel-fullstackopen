@@ -68,7 +68,7 @@ const App = () => {
         <div>
           <Notification notification={notification} />
           <h2>Log in to application</h2>
-          <LoginForm setUser={setUser} />
+          <LoginForm setUser={setUser} notify={notify} />
         </div>
       ) : (
         <div>
