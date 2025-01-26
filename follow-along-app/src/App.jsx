@@ -50,7 +50,7 @@ const App = () => {
       const returnedNote = await noteService.update(id, changedNote);
       setNotes(notes.map(note => (note.id !== id ? note : returnedNote)));
     } catch (error) {
-      setErrorMessage(`Note '${note.content}' was already removed from server`);
+      setErrorMessage('Note was already removed from server');
       setTimeout(() => {
         setErrorMessage(null);
       }, 5000);
@@ -111,7 +111,7 @@ const App = () => {
         loginForm()
       ) : (
         <div>
-          <p>{user.name} logged-in</p>
+          <p>{user.name} logged in</p>
           <Togglable buttonLabel='new note' ref={noteFormRef}>
             <NoteForm createNote={addNote} />
           </Togglable>
