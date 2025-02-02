@@ -1,5 +1,5 @@
 const { test, expect, beforeEach, describe } = require('@playwright/test');
-const { loginWith, blogloginWith, createBlog } = require('./helpers');
+const { clickViewButtons, blogloginWith, createBlog } = require('./helpers');
 
 describe('Blog app', () => {
   beforeEach(async ({ page, request }) => {
@@ -82,13 +82,12 @@ describe('Blog app', () => {
         url: 'https://www.test.url',
         likes: 3,
       });
-      // click the view buttons
+
       const viewButtons = await page
         .getByRole('button', { name: 'view' })
         .all();
-      for (let i = 0; i < viewButtons.length; i++) {
-        await viewButtons[0].click();
-      }
+
+      await clickViewButtons(page, viewButtons);
       // click the like buttons
       const likeButtons = await page
         .getByRole('button', { name: 'like' })
@@ -101,9 +100,7 @@ describe('Blog app', () => {
         }
       }
       await page.reload();
-      for (let i = 0; i < viewButtons.length; i++) {
-        await viewButtons[0].click();
-      }
+      await clickViewButtons(page, viewButtons);
       const likesElements = await page.getByText(/likes \d+/).all();
       const likesArray = await Promise.all(
         likesElements.map(async element => {

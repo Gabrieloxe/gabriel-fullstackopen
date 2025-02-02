@@ -26,4 +26,10 @@ const createBlog = async (page, blog) => {
   await page.getByText(`${blog.title} ${blog.author}`).waitFor();
 };
 
-export { loginWith, createNote, blogloginWith, createBlog };
+const clickViewButtons = async (page, viewButtons) => {
+  for (let i = 0; i < viewButtons.length; i++) {
+    await page.getByRole('button', { name: 'view' }).first().click();
+  }
+};
+
+export { loginWith, createNote, blogloginWith, createBlog, clickViewButtons };
