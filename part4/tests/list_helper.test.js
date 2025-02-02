@@ -19,7 +19,6 @@ describe('list helpers', () => {
 
     test('when list has only one blog, equals the likes of that', () => {
       const oneBlog = [mockBlogs[1]];
-      console.log(oneBlog);
       const result = listHelper.totalLikes(oneBlog);
       assert.strictEqual(result, 5);
     });
