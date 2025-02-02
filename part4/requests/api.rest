@@ -15,7 +15,6 @@ Content-Type: application/json
 
 
 
-
 ### lgoin as the user and get the bearer token
 POST http://localhost:3003/api/login
 Content-Type: application/json
@@ -25,31 +24,33 @@ Content-Type: application/json
     "password": "hellaspassword"
 }
 
+### test login as the user and get the bearer token
+POST http://localhost:3003/api/login
+Content-Type: application/json
 
+{
+    "username": "mluukkai",
+    "password": "salainen"
+}
 
 
 ### Create a new blog
-POST http://localhost:3003/api/blogs
+POST http://localhost:5173/api/blogs
 Content-Type: application/json
-Authorization: Bearer token
-
+Authorization: Bearer
 
 {
     "title": "blog to delete",
     "author": "hellas",
     "url": "https://deleteblog2.com",
-    "likes": 1,
+    "likes": 1
 }
 
 
 ### put request to update a blog
 PUT http://localhost:3003/api/blogs/67615a68c66f9214ae5489ce
 Content-Type: application/json
-Authorization : Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImhlbGxhcyIsImlkIjoiNjc2MTQzYzQwNmYyODFkNDI5Mjk4ZWJmIiwiaWF0IjoxNzM0NzA1NTUxLCJleHAiOjE3MzQ3MDkxNTF9.-Els2jyyLexPZaUR3-wDuyv324Cx7so_k9fmyvFZ5Ew
-
-{
-    "url": "https://hellas.com",
-    "title": "hellas blog",
+Authorization : Bearer
     "author": "hellas",
     "likes": 4,
     "user" : "676143c406f281d429298ebf"
@@ -57,7 +58,7 @@ Authorization : Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Imhl
 
 ### get all blogs
 GET http://localhost:3003/api/blogs
-Authorization : Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImhlbGxhcyIsImlkIjoiNjc2MTQzYzQwNmYyODFkNDI5Mjk4ZWJmIiwiaWF0IjoxNzM0NzA1NTUxLCJleHAiOjE3MzQ3MDkxNTF9.-Els2jyyLexPZaUR3-wDuyv324Cx7so_k9fmyvFZ5Ew
+Authorization : Bearer
 Content-Type: application/json
 
 

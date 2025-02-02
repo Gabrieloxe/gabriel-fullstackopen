@@ -41,7 +41,10 @@ const App = () => {
   };
 
   const addBlog = async blogObject => {
-    const createdBlog = await blogService.create(blogObject);
+    const createdBlog = await blogService.create({
+      ...blogObject,
+      user: user.id,
+    });
     setBlogs(blogs.concat(createdBlog));
     notify(`a new blog ${createdBlog.title} by ${createdBlog.author} added`);
   };
@@ -60,7 +63,7 @@ const App = () => {
     }
   };
 
-  const sortedBlogs = blogs.sort((a, b) => a.likes - b.likes);
+  const sortedBlogs = blogs.sort((a, b) => b.likes - a.likes);
 
   return (
     <div>
@@ -79,7 +82,7 @@ const App = () => {
             <button onClick={handleLogout}>logout</button>
           </div>
           <Togglable buttonLabel='new blog' ref={blogFormRef}>
-            <BlogForm addBlog={addBlog} />
+            <BlogForm addBlog={addBlog} user={user} />
           </Togglable>
           {sortedBlogs.map(blog => (
             <Blog

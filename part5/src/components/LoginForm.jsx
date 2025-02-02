@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import loginService from '../services/login';
 import blogService from '../services/blogs';
 import PropTypes from 'prop-types';
-import { notify } from '../../../part4/controllers/blogRouter';
 
 const LoginForm = ({ setUser, notify }) => {
   const [username, setUsername] = useState('');
@@ -33,12 +32,13 @@ const LoginForm = ({ setUser, notify }) => {
   const handleUsernameChange = ({ target }) => setUsername(target.value);
 
   return (
-    <form onSubmit={handleLogin}>
+    <form onSubmit={handleLogin} name='LoginToBlogApp'>
       <div>
         username
         <input
           type='text'
           value={username}
+          aria-label='username'
           name='Username'
           onChange={handleUsernameChange}
         />
@@ -48,6 +48,7 @@ const LoginForm = ({ setUser, notify }) => {
         <input
           type='password'
           value={password}
+          aria-label='password'
           name='Password'
           onChange={handlePasswordChange}
         />
