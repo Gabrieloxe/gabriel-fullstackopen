@@ -1,5 +1,5 @@
 import { expect } from 'vitest';
-import { reducer } from './anecdoteReducer';
+import anecdoteReducer from './anecdoteReducer';
 import deepFreeze from 'deep-freeze';
 
 describe('anecdoteReducer', () => {
@@ -7,16 +7,14 @@ describe('anecdoteReducer', () => {
     const state = [];
 
     const action = {
-      type: 'CREATE',
-      payload: {
-        content: 'If it hurts, do it more often',
-      },
+      type: 'anecdotes/create',
+      payload: 'If it hurts, do it more often',
     };
 
     deepFreeze(state);
-    const newState = reducer(state, action);
+    const newState = anecdoteReducer(state, action);
     expect(newState).toHaveLength(1);
-    expect(newState[0].content).toBe('If it hurts, do it more often');
+    expect(newState.map(s => s.content)).toContainEqual(action.payload);
   });
 
   test('returns new state with action VOTE', () => {
@@ -29,12 +27,10 @@ describe('anecdoteReducer', () => {
     ];
     deepFreeze(state);
     const action = {
-      type: 'VOTE',
-      payload: {
-        id: 1,
-      },
+      type: 'anecdotes/vote',
+      payload: 1,
     };
-    const newState = reducer(state, action);
+    const newState = anecdoteReducer(state, action);
     expect(newState[0].votes).toBe(1);
   });
 });

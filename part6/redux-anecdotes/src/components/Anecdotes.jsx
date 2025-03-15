@@ -1,15 +1,9 @@
-import { useSelector, useDispatch } from 'react-redux';
-import { voteAnecdote } from '../reducers/anecdoteReducer';
+import { useSelector } from 'react-redux';
 import { Button, List, Typography } from 'antd';
 import Filter from './Filter';
+import { vote } from '../reducers/anecdoteReducer';
 
 const Anecdotes = () => {
-  const dispatch = useDispatch();
-
-  const vote = id => {
-    dispatch(voteAnecdote(id));
-  };
-
   const filteredAnecdotes = useSelector(state => {
     const filter = state.filter;
     return state.anecdotes.filter(anecdote =>

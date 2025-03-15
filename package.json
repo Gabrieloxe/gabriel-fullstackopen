@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "@ant-design/v5-patch-for-react-19": "^1.0.3",
     "antd": "^5.24.3",
     "dotenv": "^10.0.0"
   },
