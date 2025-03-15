@@ -1,5 +1,6 @@
 import { useDispatch } from 'react-redux';
 import { addAnecdote } from '../reducers/anecdoteReducer';
+import { Input, Button, Form } from 'antd';
 
 const AnecdoteForm = () => {
   const dispatch = useDispatch();
@@ -10,16 +11,28 @@ const AnecdoteForm = () => {
     event.target.anecdote.value = '';
     dispatch(addAnecdote(content));
   };
-  
+
   return (
     <div>
       <h2>create new</h2>
-      <form onSubmit={createAnecdote}>
-        <div>
-          <input name='anecdote' />
-        </div>
-        <button type='submit'>create</button>
-      </form>
+      <Form
+        onSubmit={createAnecdote}
+        style={{
+          maxWidth: 600,
+        }}
+        initialValues={{
+          remember: true,
+        }}
+      >
+        <Form.Item label='Create new Anecdote'>
+          <Input name='anecdote' />
+        </Form.Item>
+        <Form.Item>
+          <Button type='primary' htmlType='submit'>
+            create
+          </Button>
+        </Form.Item>
+      </Form>
     </div>
   );
 };

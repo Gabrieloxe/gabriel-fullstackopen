@@ -1,21 +1,33 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { toggleImportanceOf } from '../reducers/noteReducer';
+import { List, Typography } from 'antd';
 
 const Note = ({ note, handleClick }) => {
   return (
-    <li onClick={handleClick}>
+    <List.Item onClick={handleClick}>
+      <Typography.Text mark>
+        {note.important ? '[important] ' : ''}
+      </Typography.Text>
       {note.content}
-      <strong> {note.important ? 'important' : ''}</strong>
-    </li>
+    </List.Item>
   );
 };
 
 const Notes = () => {
   const dispatch = useDispatch();
-  const notes = useSelector(state => state);
+  const notes = useSelector(state => {
+    switch (state.filter) {
+      case 'IMPORTANT':
+        return state.notes.filter(note => note.important);
+      case 'NON-IMPORTANT':
+        return state.notes.filter(note => !note.important);
+      default:
+        return state.notes;
+    }
+  });
 
   return (
-    <ul>
+    <List>
       {notes.map(note => (
         <Note
           key={note.id}
@@ -23,7 +35,7 @@ const Notes = () => {
           handleClick={() => dispatch(toggleImportanceOf(note.id))}
         />
       ))}
-    </ul>
+    </List>
   );
 };
 
