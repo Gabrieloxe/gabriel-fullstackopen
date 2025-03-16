@@ -35,12 +35,13 @@ const anecdoteSlice = createSlice({
         anecdote.id !== id ? anecdote : likedAnecdote
       );
     },
-    create(state, action) {
+    createAnecdote(state, action) {
       const content = action.payload;
-      return [...state, asObject(content)];
+      const newAnecdote = asObject(content);
+      state.push(newAnecdote);
     },
   },
 });
 
-export const { vote, create } = anecdoteSlice.actions;
+export const { vote, createAnecdote } = anecdoteSlice.actions;
 export default anecdoteSlice.reducer;

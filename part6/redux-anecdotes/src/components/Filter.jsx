@@ -1,17 +1,16 @@
-import { useDispatch } from 'react-redux';
-import { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { filterChange } from '../reducers/FilterReducer';
 import { Input } from 'antd';
 
 const Filter = () => {
-  const [value, setValue] = useState('');
-
   const dispatch = useDispatch();
+  const filter = useSelector(state => state.filter);
+
   const handleChange = event => {
-    const filter = event.target.value;
-    setValue(filter);
-    dispatch(filterChange(value));
+    const filterValue = event.target.value;
+    dispatch(filterChange(filterValue));
   };
+
   const style = {
     marginBottom: 10,
   };
@@ -21,9 +20,9 @@ const Filter = () => {
       <Input
         addonBefore='filter'
         onChange={handleChange}
-        value={value}
+        value={filter}
         allowClear
-        onClear={() => setValue('')}
+        onClear={() => dispatch(filterChange(''))}
       />
     </div>
   );

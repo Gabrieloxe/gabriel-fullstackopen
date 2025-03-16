@@ -1,17 +1,25 @@
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+import { useMemo } from 'react';
 import { Button, List, Typography } from 'antd';
 import Filter from './Filter';
 import { vote } from '../reducers/anecdoteReducer';
 
 const Anecdotes = () => {
-  const filteredAnecdotes = useSelector(state => {
-    const filter = state.filter;
-    return state.anecdotes.filter(anecdote =>
-      anecdote.content.toLowerCase().includes(filter.toLowerCase())
-    );
-  });
+  const dispatch = useDispatch();
+  const anecdotes = useSelector(state => state.anecdotes);
+  const filter = useSelector(state => state.filter);
 
-  const sortedAnecdotes = filteredAnecdotes.sort((a, b) => b.votes - a.votes);
+  const sortedAndFilteredAnecdotes = useMemo(() => {
+    return anecdotes
+      .filter(anecdote =>
+        anecdote.content.toLowerCase().includes(filter.toLowerCase())
+      )
+      .sort((a, b) => b.votes - a.votes);
+  }, [anecdotes, filter]);
+
+  const handleVote = id => {
+    dispatch(vote(id));
+  };
 
   return (
     <List
@@ -22,14 +30,14 @@ const Anecdotes = () => {
         </div>
       }
     >
-      {sortedAnecdotes.map(anecdote => (
+      {sortedAndFilteredAnecdotes.map(anecdote => (
         <List.Item key={anecdote.id}>
           <div>
             <Typography.Text mark>[{anecdote.votes} votes] </Typography.Text>
             {anecdote.content}
           </div>
           <div>
-            <Button onClick={() => vote(anecdote.id)}>vote</Button>
+            <Button onClick={() => handleVote(anecdote.id)}>vote</Button>
           </div>
         </List.Item>
       ))}
