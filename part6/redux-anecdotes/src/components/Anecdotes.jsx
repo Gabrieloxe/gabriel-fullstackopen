@@ -3,6 +3,8 @@ import { useMemo } from 'react';
 import { Button, List, Typography } from 'antd';
 import Filter from './Filter';
 import { vote } from '../reducers/anecdoteReducer';
+import { Notification } from './Notification';
+import { showNotification } from '../reducers/notificationReducer';
 
 const Anecdotes = () => {
   const dispatch = useDispatch();
@@ -19,6 +21,8 @@ const Anecdotes = () => {
 
   const handleVote = id => {
     dispatch(vote(id));
+    const anecdote = anecdotes.find(a => a.id === id).content;
+    dispatch(showNotification(`You voited '${anecdote}'`, 5));
   };
 
   return (
@@ -30,6 +34,7 @@ const Anecdotes = () => {
         </div>
       }
     >
+      <Notification />
       {sortedAndFilteredAnecdotes.map(anecdote => (
         <List.Item key={anecdote.id}>
           <div>
