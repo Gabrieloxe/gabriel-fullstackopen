@@ -13,4 +13,12 @@ const createNew = async content => {
   return response.data;
 };
 
-export default { getAll, createNew };
+const clearAll = async () => {
+  await axios.delete(baseUrl);
+};
+
+const deleteNote = async id => {
+  await axios.delete(`${baseUrl}/${id}`);
+};
+
+export default { getAll, createNew, clearAll, deleteNote };
