@@ -2,7 +2,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useMemo } from 'react';
 import { Button, List, Typography } from 'antd';
 import Filter from './Filter';
-import { vote } from '../reducers/anecdoteReducer';
+import { voteFor } from '../reducers/anecdoteReducer';
 import { Notification } from './Notification';
 import { showNotification } from '../reducers/notificationReducer';
 
@@ -20,9 +20,9 @@ const Anecdotes = () => {
   }, [anecdotes, filter]);
 
   const handleVote = id => {
-    dispatch(vote(id));
-    const anecdote = anecdotes.find(a => a.id === id).content;
-    dispatch(showNotification(`You voited '${anecdote}'`, 5));
+    const anecdote = anecdotes.find(a => a.id === id);
+    dispatch(voteFor(anecdote));
+    dispatch(showNotification(`You voited '${anecdote.content}'`, 5));
   };
 
   return (

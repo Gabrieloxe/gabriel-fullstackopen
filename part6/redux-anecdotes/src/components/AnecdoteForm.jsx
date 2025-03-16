@@ -1,15 +1,15 @@
 import { useDispatch } from 'react-redux';
 import { Input, Button, Form } from 'antd';
-import { createAnecdote } from '../reducers/anecdoteReducer';
+import { create } from '../reducers/anecdoteReducer';
 import { showNotification } from '../reducers/notificationReducer';
 
 const AnecdoteForm = () => {
   const dispatch = useDispatch();
   const [form] = Form.useForm();
 
-  const onFinish = values => {
+  const onFinish = async values => {
     const content = values.anecdote;
-    dispatch(createAnecdote(content));
+    dispatch(create(content));
     dispatch(showNotification(`You created '${content}'`, 5));
     form.resetFields();
   };
