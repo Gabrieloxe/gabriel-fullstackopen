@@ -1,6 +1,6 @@
 import { useSelector, useDispatch } from 'react-redux';
 import { useMemo } from 'react';
-import { Button, List, Typography } from 'antd';
+import { Button, List, Typography, Badge, Divider } from 'antd';
 import Filter from './Filter';
 import { voteFor } from '../reducers/anecdoteReducer';
 import { Notification } from './Notification';
@@ -38,7 +38,9 @@ const Anecdotes = () => {
       {sortedAndFilteredAnecdotes.map(anecdote => (
         <List.Item key={anecdote.id}>
           <Typography.Text>
-            [{anecdote.votes} votes] {anecdote.content}
+            <Badge count={anecdote.votes} showZero text='votes' />
+            <Divider type='vertical' />
+            {anecdote.content}
           </Typography.Text>
           <Button onClick={() => handleVote(anecdote.id)}>vote</Button>
         </List.Item>
