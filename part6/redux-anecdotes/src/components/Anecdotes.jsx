@@ -37,13 +37,10 @@ const Anecdotes = () => {
       <Notification />
       {sortedAndFilteredAnecdotes.map(anecdote => (
         <List.Item key={anecdote.id}>
-          <div>
-            <Typography.Text mark>[{anecdote.votes} votes] </Typography.Text>
-            {anecdote.content}
-          </div>
-          <div>
-            <Button onClick={() => handleVote(anecdote.id)}>vote</Button>
-          </div>
+          <Typography.Text>
+            [{anecdote.votes} votes] {anecdote.content}
+          </Typography.Text>
+          <Button onClick={() => handleVote(anecdote.id)}>vote</Button>
         </List.Item>
       ))}
     </List>

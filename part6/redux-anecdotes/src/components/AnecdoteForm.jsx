@@ -15,32 +15,30 @@ const AnecdoteForm = () => {
   };
 
   return (
-    <div>
+    <Form
+      form={form}
+      onFinish={onFinish}
+      style={{
+        maxWidth: 600,
+      }}
+      initialValues={{
+        remember: true,
+      }}
+    >
       <h2>create new</h2>
-      <Form
-        form={form}
-        onFinish={onFinish}
-        style={{
-          maxWidth: 600,
-        }}
-        initialValues={{
-          remember: true,
-        }}
+      <Form.Item
+        label='Create new Anecdote'
+        name='anecdote'
+        rules={[{ required: true, message: 'Please input an anecdote!' }]}
       >
-        <Form.Item
-          label='Create new Anecdote'
-          name='anecdote'
-          rules={[{ required: true, message: 'Please input an anecdote!' }]}
-        >
-          <Input />
-        </Form.Item>
-        <Form.Item>
-          <Button type='primary' htmlType='submit'>
-            create
-          </Button>
-        </Form.Item>
-      </Form>
-    </div>
+        <Input />
+      </Form.Item>
+      <Form.Item>
+        <Button type='primary' htmlType='submit'>
+          create
+        </Button>
+      </Form.Item>
+    </Form>
   );
 };
 

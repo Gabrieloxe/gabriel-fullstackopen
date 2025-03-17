@@ -11,20 +11,14 @@ const Filter = () => {
     dispatch(filterChange(filterValue));
   };
 
-  const style = {
-    marginBottom: 10,
-  };
-
   return (
-    <div style={style}>
-      <Input
-        addonBefore='filter'
-        onChange={handleChange}
-        value={filter}
-        allowClear
-        onClear={() => dispatch(filterChange(''))}
-      />
-    </div>
+    <Input
+      addonBefore='filter'
+      onChange={handleChange}
+      value={filter}
+      allowClear
+      onClear={() => dispatch(filterChange(''))}
+    />
   );
 };
 
