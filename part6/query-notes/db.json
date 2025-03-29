@@ -1,0 +1,14 @@
+{
+  "notes": [
+    {
+      "content": "One fake note to see if it loads in the tanstack query",
+      "important": true,
+      "id": "1"
+    },
+    {
+      "id": "67d9",
+      "content": "add a new note",
+      "important": false
+    }
+  ]
+}
