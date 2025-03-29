@@ -11,9 +11,11 @@
     "server": "node server.js"
   },
   "dependencies": {
+    "@tanstack/react-query": "^5.70.0",
     "antd": "^5.24.5",
-    "axios": "^1.4.0",
+    "axios": "^1.8.4",
     "json-server": "^0.17.4",
+    "lodash": "^4.17.21",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
   },

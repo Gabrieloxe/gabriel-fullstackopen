@@ -1,18 +1,24 @@
+import { Alert } from 'antd';
+import { useContext } from 'react';
+import { NotificationContext } from '../contexts/notificationContext';
+
 const Notification = () => {
-  const style = {
-    border: 'solid',
-    padding: 10,
-    borderWidth: 1,
-    marginBottom: 5
+  const { notification } = useContext(NotificationContext);
+
+  if (!notification) {
+    return null;
   }
-  
-  if (true) return null
+
+  const alertType = notification.type === 'error' ? 'error' : 'info';
 
   return (
-    <div style={style}>
-      
-    </div>
-  )
-}
+    <Alert
+      message={notification.message}
+      type={alertType}
+      showIcon
+      style={{ marginBottom: '20px' }}
+    />
+  );
+};
 
-export default Notification
+export default Notification;
